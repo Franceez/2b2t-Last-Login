@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ndd.html</title>
+</head>
+
+<body>
+
+	<h1>2b2t Last Seen</h1>
+	<p>Type the username in this box</p>
+	<label for="name">Enter Username:</label>
+	<input type="text" id="name" name="name">
+	<input type="button" onclick="searchFunction()" value="Search">
+
+
+
+
+<script>
+	function searchFunction() {
+		var mcname = document.getElementById("name").value;
+		console.log('Username: '+mcname);
+
+
+    var xmlhttp = new XMLHttpRequest(),
+      method = 'GET',
+      url = 'https://api.2b2t.dev/seen?username='+mcname;
+
+	 setTimeout(function(){ console.log(xmlhttp['responseText']); }, 450);
+
+    xmlhttp.open(method, url, true);
+    xmlhttp.onload = function () {
+
+      }
+    xmlhttp.send();
+    console.log(xmlhttp);
+    setTimeout(function(){
+
+			var response = xmlhttp['responseText']
+      var parsed = JSON.parse(response)
+			console.log(parsed);
+			var fseen = parsed[0].seen
+			document.getElementById("lastSeen").innerHTML = fseen
+			function waitHtml(){}
+
+		}, 500);
+
+
+	};
+
+
+</script>
+
+<h3 onload="waitHtml()">"Last Seen: <span id="lastSeen"></span>"</h3>
+
+
+
+
+</body>
+
+
+</html>
